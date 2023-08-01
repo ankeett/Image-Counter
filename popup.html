@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+
+
+	<body>
+		<div class="container wider-popup">
+			<h1>Image KallOut Beta</h1>
+			<button
+				id="toggle_extension"
+				style="border: none; background-color: transparent"
+			>
+			</button>
+			<p id="totalCount"></p>
+			
+			<div id="settings" class="options">
+				<label for="placement" class="me-2">Position:</label>
+				<select name="placement" id="numberPlacement"></select>
+				
+				<label for="font" class="me-2">Font:</label>
+				<select name="font" id="fontSize"></select>
+			</div>
+
+			<div class="smallImagesCheckBox">
+				<label for="includeSmallImagesCheckbox">
+					<input type="checkbox" id="includeSmallImagesCheckbox"> Exclude Small Images
+				</label>
+			</div>
+				
+			<button id="hotkey" class="shadow btnAssign">
+				Configure Shortcut Key
+			</button>
+		</div>
+	</body>
+	<script src="popup.js"></script>
+</html>

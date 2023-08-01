@@ -1,0 +1,35 @@
+{
+	"name": "Image KallOut",
+	"description": "Places a number on the images of a page.  Say the number of the image you want your peers to focus their attention on when presenting.",
+	"version": "0.1.2",
+	"manifest_version": 3,
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": ["storage", "activeTab", "tabs"],
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content.js"]
+		}
+	],
+	"action": {
+		"default_popup": "popup.html",
+		"default_icon": {
+			"16": "/images/ik-icon-off_64.png"
+		}
+	},
+	"icons": {
+		"48": "/images/ik-icon-on_128.png"
+	},
+	"commands": {
+		"_execute_action": {},
+		"duplicate-tab": {
+			"suggested_key": {
+				"default": "Ctrl+Q",
+				"mac": "Ctrl+Q"
+			},
+			"description": "Toggle the Extension ON or OFF"
+		}
+	}
+}

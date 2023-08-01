@@ -1,0 +1,42 @@
+#about,
+#settings {
+    width: 350px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.btnAssign {
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+.smallImagesCheckBox{
+    font-size: 12px;
+    margin-top: 20px;
+}
+.options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    font-size: 14px;
+  }
+  .container {
+    text-align: center;
+  }
+  h1 {
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 20px;
+  }
