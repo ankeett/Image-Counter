@@ -24,6 +24,7 @@ const positionStyles = {
 };
 
 let totalImages = 0; // Total number of images on the page
+const imageMap = new Map(); // Map to track images and their assigned label numbers
 
 
 // set the numberPlacementPosition if it is undefined
@@ -109,46 +110,67 @@ async function isSmallImage(image) {
 
 // function to add overlay to the images
 // with numberPosition and fontSize parameters
-async function addCountToImage(numberPosition,fontSize) {
-	// get all the tags with img tag
+
+async function addCountToImage(numberPosition, fontSize) {
 	var img = document.getElementsByTagName("img");
-
-	// setting the variable for adding count
-	// on the overlay of image
-	var counter = 1;
-	totalImages = 0;
-
-	// looping through all the img tags fetched
-	// we start looping from 4th image because
-	// the images we want to overlay starts
-	// from the fourth elemet of img array
+  
 	for (var i = 0; i < img.length; i++) {
-		const image = img[i];
+	  const image = img[i];
+  
+	  if (!await isSmallImage(image)) {
+		// Check if the image has already been processed
+		if (!imageMap.has(image)) {
+		  totalImages++;
+		  imageMap.set(image, totalImages); // Assign the label number to the image
 
-		// Ignore small images if the option is enabled
-		if (!await isSmallImage(image)) {
-			totalImages++;
-
-			const labelStyles = `
-				position: absolute;
-				padding: 4px 8px;
-				background-color: rgba(0, 0, 0, 0.75);
-				color: #fff;
-				font-size: ${fontSize || "25px"};
-				font-weight: bold;
-				z-index: 9999;
-				`;
-
-			const numberLabel = document.createElement("div");
-			numberLabel.innerText = totalImages;
-			// numberLabel.style.cssText = labelStyles;
-
-			numberLabel.style.cssText = labelStyles + positionStyles[numberPosition];
-
-
-			image.parentNode.insertBefore(numberLabel, image);
-
+		  const labelStyles = `
+			position: absolute;
+			padding: 4px 8px;
+			background-color: rgba(0, 0, 0, 0.75);
+			color: #fff;
+			font-size: ${fontSize || "25px"};
+			font-weight: bold;
+			z-index: 9999;
+			`;
+		  const labelPosition = calculateLabelPosition(numberPosition, image);
+  
+		  const numberLabel = document.createElement("div");
+		  numberLabel.innerText = totalImages;
+		  numberLabel.className = "image-label";
+		  numberLabel.style.cssText = labelStyles + labelPosition;
+  
+		  image.parentNode.insertBefore(numberLabel, image);
 		}
+	  }
 	}
-}
+  }
 
+ 
+  
+  function calculateLabelPosition(numberPosition, image) {
+	const imageWidth = image.width;
+	const imageHeight = image.height;
+  
+	let positionStyle = positionStyles[numberPosition];
+  
+	if (numberPosition === "Center") {
+	  return positionStyle;
+	}
+	if (positionStyle.includes("top")) {
+	  positionStyle = positionStyle.replace("top:", `top: 10px;`);
+	} else if (positionStyle.includes("bottom")) {
+	  positionStyle = positionStyle.replace("bottom:", `bottom: 10px;`);
+	}
+  
+	if (positionStyle.includes("left")) {
+	  positionStyle = positionStyle.replace("left:", `left: 10px;`);
+	} else if (positionStyle.includes("right")) {
+	  positionStyle = positionStyle.replace("right:", `right: 10px;`);
+	}
+  
+  
+	return positionStyle;
+  }
+  
+  
+  
