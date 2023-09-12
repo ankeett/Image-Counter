@@ -1,5 +1,5 @@
 {
-	"name": "Image KallOut",
+	"name": "Image Counter",
 	"description": "Places a number on the images of a page.  Say the number of the image you want your peers to focus their attention on when presenting.",
 	"version": "0.1.2",
 	"manifest_version": 3,
